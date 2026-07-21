@@ -1,19 +1,17 @@
 [
   {
-    "name": "Upscale",
+    "name": "Upscale with no previous job shows prompt to generate",
     "steps": [
       {
+        "send": { "callback": "action:upscale" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Generate upscaled version of selected image"
+              "text": "No image to upscale. Tap 🎨 Generate to create one first."
             }
           }
-        ],
-        "send": {
-          "callback": "action:upscale"
-        }
+        ]
       }
     ]
   }

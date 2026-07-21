@@ -1,19 +1,17 @@
 [
   {
-    "name": "Submit prompt",
+    "name": "Submit prompt asks for image description",
     "steps": [
       {
+        "send": { "callback": "prompt:submit" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Initiate new image generation request"
+              "text": "✏️ Send me a description of the image you want to create."
             }
           }
-        ],
-        "send": {
-          "callback": "prompt:submit"
-        }
+        ]
       }
     ]
   }

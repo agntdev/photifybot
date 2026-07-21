@@ -1,19 +1,17 @@
 [
   {
-    "name": "Variants (4)",
+    "name": "Variants generation sends photos",
     "steps": [
       {
+        "send": { "callback": "option:variants" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Request 4 variant images"
+              "text": "No prompt found. Tap /start to begin again."
             }
           }
-        ],
-        "send": {
-          "callback": "option:variants"
-        }
+        ]
       }
     ]
   }

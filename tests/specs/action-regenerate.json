@@ -1,19 +1,17 @@
 [
   {
-    "name": "Regenerate",
+    "name": "Regenerate with no previous job shows prompt to generate",
     "steps": [
       {
+        "send": { "callback": "action:regenerate" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Repeat last generation with same prompt"
+              "text": "No previous generation to regenerate. Tap 🎨 Generate to create one."
             }
           }
-        ],
-        "send": {
-          "callback": "action:regenerate"
-        }
+        ]
       }
     ]
   }

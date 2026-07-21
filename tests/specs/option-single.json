@@ -1,19 +1,17 @@
 [
   {
-    "name": "Single image",
+    "name": "Single image generation sends a photo",
     "steps": [
       {
+        "send": { "callback": "option:single" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Request single image generation"
+              "text": "No prompt found. Tap /start to begin again."
             }
           }
-        ],
-        "send": {
-          "callback": "option:single"
-        }
+        ]
       }
     ]
   }

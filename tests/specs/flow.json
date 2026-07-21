@@ -1,0 +1,105 @@
+[
+  {
+    "name": "Full prompt flow: submit → type prompt → see confirmation",
+    "steps": [
+      {
+        "send": { "text": "/start" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "👋 Welcome! Tap a button below to get started." } }
+        ]
+      },
+      {
+        "send": { "callback": "prompt:submit" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "✏️ Send me a description of the image you want to create." } }
+        ]
+      },
+      {
+        "send": { "text": "A sunset over mountains" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "Got it! Here's what you asked for:\n\n\"A sunset over mountains\"\n\nHow would you like to generate it?" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Generation attempt triggers API call (single)",
+    "steps": [
+      {
+        "send": { "callback": "prompt:submit" },
+        "expect": [
+          { "method": "sendMessage" }
+        ]
+      },
+      {
+        "send": { "text": "A mountain landscape" },
+        "expect": [
+          { "method": "sendMessage" }
+        ]
+      },
+      {
+        "send": { "callback": "option:single" },
+        "expect": [
+          { "method": "sendChatAction" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Generation attempt triggers API call (variants)",
+    "steps": [
+      {
+        "send": { "callback": "prompt:submit" },
+        "expect": [
+          { "method": "sendMessage" }
+        ]
+      },
+      {
+        "send": { "text": "A cat in space" },
+        "expect": [
+          { "method": "sendMessage" }
+        ]
+      },
+      {
+        "send": { "callback": "option:variants" },
+        "expect": [
+          { "method": "sendChatAction" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Prompt too short rejected",
+    "steps": [
+      {
+        "send": { "callback": "prompt:submit" },
+        "expect": [
+          { "method": "sendMessage" }
+        ]
+      },
+      {
+        "send": { "text": "hi" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "Prompt is too short — give me a bit more detail." } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Prompt of adequate length accepted",
+    "steps": [
+      {
+        "send": { "callback": "prompt:submit" },
+        "expect": [
+          { "method": "sendMessage" }
+        ]
+      },
+      {
+        "send": { "text": "a dog" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "Got it! Here's what you asked for:\n\n\"a dog\"\n\nHow would you like to generate it?" } }
+        ]
+      }
+    ]
+  }
+]
