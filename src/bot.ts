@@ -6,7 +6,24 @@ import type { StorageAdapter } from "grammy";
 // bot grows. Durable domain data must NOT live here — use the toolkit's
 // persistent storage (see AGENTS.md).
 export interface Session {
-  // example: step?: "awaiting_amount";
+  step?: "idle" | "awaiting_prompt" | "prompt_submitted";
+  pendingPrompt?: string;
+  lastJob?: {
+    prompt: string;
+    variantCount: number;
+    imageUrls: string[];
+  };
+  quota?: number;
+  flowExpiresAt?: number;
+}
+
+export const FREE_QUOTA = 10;
+export const QUOTA_KEY = "quota";
+export const PAYMENT_LINK = "https://buy.stripe.com/imagebot";
+
+/** Injectable clock — override in tests to drive time-dependent behavior. */
+export function now(): number {
+  return Date.now();
 }
 
 export type Ctx = BotContext<Session>;
